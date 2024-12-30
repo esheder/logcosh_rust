@@ -47,6 +47,16 @@ where
     }
 }
 
+#[no_mangle]
+pub extern "C" fn approx_logcosh_f32(x: f32) -> f32 {
+    approx_logcosh(x)
+}
+
+#[no_mangle]
+pub extern "C" fn approx_logcosh_f64(x: f64) -> f64 {
+    approx_logcosh(x)
+}
+
 pub fn approx_clogcosh<T>(x: Complex<T>) -> Complex<T>
 where
     T: ConstLogcosh<T> + Float,
@@ -66,6 +76,16 @@ where
     }
 }
 
+#[no_mangle]
+pub extern "C" fn approx_logcosh_c32(x: Complex<f32>) -> Complex<f32> {
+    approx_clogcosh(x)
+}
+
+#[no_mangle]
+pub extern "C" fn approx_logcosh_c64(x: Complex<f64>) -> Complex<f64> {
+    approx_clogcosh(x)
+}
+
 pub fn logcosh<T>(x: T) -> T
 where
     T: ConstLogcosh<T> + Float,
@@ -73,6 +93,16 @@ where
     let xabs = x.abs();
     let p = T::exp(-T::TWO * xabs);
     xabs + T::ln_1p(p) - T::LN_2
+}
+
+#[no_mangle]
+pub extern "C" fn logcosh_f32(x: f32) -> f32 {
+    logcosh(x)
+}
+
+#[no_mangle]
+pub extern "C" fn logcosh_f64(x: f64) -> f64 {
+    logcosh(x)
 }
 
 pub fn clogcosh<T>(x: Complex<T>) -> Complex<T>
@@ -87,6 +117,16 @@ where
     };
     let p: Complex<T> = Complex::exp(-T::TWOPLX * s);
     s + Complex::ln(T::ONEPLX + p) - T::LN_2PLX
+}
+
+#[no_mangle]
+pub extern "C" fn logcosh_c32(x: Complex<f32>) -> Complex<f32> {
+    clogcosh(x)
+}
+
+#[no_mangle]
+pub extern "C" fn logcosh_c64(x: Complex<f64>) -> Complex<f64> {
+    clogcosh(x)
 }
 
 #[cfg(test)]
