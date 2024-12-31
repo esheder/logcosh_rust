@@ -39,7 +39,7 @@ where
     T: ConstLogcosh<T> + Float,
 {
     if x.abs() > T::LARGE {
-        return x.abs() - T::LN_2;
+        x.abs() - T::LN_2
     } else if x.abs() < T::SMALL {
         return x * x / T::TWO;
     } else {
@@ -68,7 +68,7 @@ where
                 false => x * x.re.signum(),
             }
         };
-        return s - T::LN_2PLX;
+        s - T::LN_2PLX
     } else if x.norm() < T::SMALL {
         return (x * x) / T::TWO;
     } else {
